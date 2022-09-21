@@ -6,26 +6,37 @@ void main() {
     test('should rank correctly between two rank', () {
       final lexo = const LexoRank();
       expect(lexo.getRankBetween(firstRank: 'a', secondRank: 'c'), equals('b'));
-      expect(lexo.getRankBetween(firstRank: 'aaa', secondRank: 'ccc'), equals('bbb'));
-      expect(lexo.getRankBetween(firstRank: 'ddddd', secondRank: 'fffff'), equals('eeeee'));
-      expect(lexo.getRankBetween(firstRank: 'aaaaa', secondRank: 'adjww'), equals('abryl'));
+      expect(lexo.getRankBetween(firstRank: 'aaa', secondRank: 'ccc'),
+          equals('bbb'));
+      expect(lexo.getRankBetween(firstRank: 'ddddd', secondRank: 'fffff'),
+          equals('eeeee'));
+      expect(lexo.getRankBetween(firstRank: 'aaaaa', secondRank: 'adjww'),
+          equals('abryl'));
     });
 
     test('should reorder the rank and generate correctly', () {
       final lexo = const LexoRank(reorderPosition: true);
       expect(lexo.getRankBetween(firstRank: 'c', secondRank: 'a'), equals('b'));
-      expect(lexo.getRankBetween(firstRank: 'ccc', secondRank: 'aaa'), equals('bbb'));
-      expect(lexo.getRankBetween(firstRank: 'fffff', secondRank: 'ddddd'), equals('eeeee'));
-      expect(lexo.getRankBetween(firstRank: 'adjww', secondRank: 'aaaaa'), equals('abryl'));
+      expect(lexo.getRankBetween(firstRank: 'ccc', secondRank: 'aaa'),
+          equals('bbb'));
+      expect(lexo.getRankBetween(firstRank: 'fffff', secondRank: 'ddddd'),
+          equals('eeeee'));
+      expect(lexo.getRankBetween(firstRank: 'adjww', secondRank: 'aaaaa'),
+          equals('abryl'));
     });
 
     test('should make the rank same size', () {
       final lexo = const LexoRank();
-      expect(lexo.getRankBetween(firstRank: 'aaa', secondRank: 'c'), equals('baa'));
-      expect(lexo.getRankBetween(firstRank: 'a', secondRank: 'ccc'), equals('bbb'));
-      expect(lexo.getRankBetween(firstRank: 'ddd', secondRank: 'fffff'), equals('eeecp'));
-      expect(lexo.getRankBetween(firstRank: 'a', secondRank: 'adjww'), equals('abryl'));
-      expect(lexo.getRankBetween(firstRank: 'aa', secondRank: 'adjww'), equals('abryl'));
+      expect(lexo.getRankBetween(firstRank: 'aaa', secondRank: 'c'),
+          equals('baa'));
+      expect(lexo.getRankBetween(firstRank: 'a', secondRank: 'ccc'),
+          equals('bbb'));
+      expect(lexo.getRankBetween(firstRank: 'ddd', secondRank: 'fffff'),
+          equals('eeecp'));
+      expect(lexo.getRankBetween(firstRank: 'a', secondRank: 'adjww'),
+          equals('abryl'));
+      expect(lexo.getRankBetween(firstRank: 'aa', secondRank: 'adjww'),
+          equals('abryl'));
     });
 
     test('should generate a List ordered of rank items', () {
@@ -37,10 +48,12 @@ void main() {
       }
 
       expect(lexo.generateInitialRank(sizeOfItems: 26), containsAll(items));
-      expect(lexo.generateInitialRank(sizeOfItems: 100), containsAll(['bviii', 'eeeee', 'akdqq']));
+      expect(lexo.generateInitialRank(sizeOfItems: 100),
+          containsAll(['bviii', 'eeeee', 'akdqq']));
     });
 
-    test('should generate a List ordered of rank items with custom rank length', () {
+    test('should generate a List ordered of rank items with custom rank length',
+        () {
       final lexo = const LexoRank();
       final items = <String>[];
       for (int i = 97; i < 123; i++) {
@@ -48,12 +61,14 @@ void main() {
         items.add(List.generate(3, (index) => c).join());
       }
 
-      expect(lexo.generateInitialRank(sizeOfItems: 26, rankLength: 3), containsAll(items));
+      expect(lexo.generateInitialRank(sizeOfItems: 26, rankLength: 3),
+          containsAll(items));
       expect(lexo.generateInitialRank(sizeOfItems: 1000, rankLength: 3),
           containsAll(['bts', 'btt', 'bug', 'izn']));
     });
 
-    test('should not throw exception when base list has not sufficient items', () {
+    test('should not throw exception when base list has not sufficient items',
+        () {
       final lexo = const LexoRank();
 
       expect(
@@ -72,7 +87,8 @@ void main() {
       String secondRank = 'c';
       final items = <String>[];
       for (int i = 0; i < 100; i++) {
-        final rank = lexo.getRankBetween(firstRank: 'a', secondRank: secondRank);
+        final rank =
+            lexo.getRankBetween(firstRank: 'a', secondRank: secondRank);
         secondRank = rank;
         items.add(rank);
       }
@@ -82,8 +98,8 @@ void main() {
 
     test('should return false when ranks does not need to be re-balanced', () {
       final lexo = const LexoRank();
-      final items =
-          lexo.generateInitialRank(sizeOfItems: 100, startRankLetter: 'd', endRankLetter: 'f');
+      final items = lexo.generateInitialRank(
+          sizeOfItems: 100, startRankLetter: 'd', endRankLetter: 'f');
       final stats = lexo.shouldRebalanced(items, maxRankLength: 5);
       expect(stats.exceeded, isFalse);
     });

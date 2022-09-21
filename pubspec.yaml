@@ -1,6 +1,6 @@
 name: lexo_rank_generator
 description: Easily generate lexicographical sort for efficient reordering list item.
-version: 1.0.0
+version: 1.0.0+1
 homepage: https://github.com/rebaz94/lexo_rank_generator
 
 environment:

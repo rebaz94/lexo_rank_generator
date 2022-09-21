@@ -6,7 +6,8 @@ void main() {
   print(result);
 
   const lexoRank2 = LexoRank(reorderPosition: true);
-  final result2 = lexoRank2.getRankBetween(firstRank: 'cccc', secondRank: 'aaaa');
+  final result2 =
+      lexoRank2.getRankBetween(firstRank: 'cccc', secondRank: 'aaaa');
   print(result2);
   print(result == result2);
 
@@ -27,7 +28,8 @@ void main() {
   print('\n');
 
   print('generating items with 3 character length, `a` to `z` letter');
-  final itemsRank3 = lexoRank.generateInitialRank(sizeOfItems: 1000, rankLength: 3);
+  final itemsRank3 =
+      lexoRank.generateInitialRank(sizeOfItems: 1000, rankLength: 3);
   print('items3: $itemsRank3');
   print('generatedItems3: ${itemsRank3.length}');
   print('\n');

@@ -31,7 +31,8 @@ class LexoRank {
   ///
   /// the [firstRank] should be lower than the [secondRank] unless the [reorderPosition] is true
   // inspired by https://medium.com/whisperarts/lexorank-what-are-they-and-how-to-use-them-for-efficient-list-sorting-a48fc4e7849f
-  String getRankBetween({required String firstRank, required String secondRank}) {
+  String getRankBetween(
+      {required String firstRank, required String secondRank}) {
     final firstPositionIsLower = firstRank.compareTo(secondRank) < 0;
     if (!firstPositionIsLower) {
       if (reorderPosition) {
@@ -78,7 +79,8 @@ class LexoRank {
     var newElement = "";
     if (difference <= 1) {
       /// add middle char from alphabet
-      newElement = firstRank + String.fromCharCode('a'.codeUnits.first + alphabetSize ~/ 2);
+      newElement = firstRank +
+          String.fromCharCode('a'.codeUnits.first + alphabetSize ~/ 2);
     } else {
       difference ~/= 2;
       var offset = 0;
@@ -86,9 +88,12 @@ class LexoRank {
         /// formula: x = difference / (size^place - 1) % size;
         /// i.e. difference = 110, size = 10, we want place 2 (middle),
         /// then x = 100 / 10^(2 - 1) % 10 = 100 / 10 % 10 = 11 % 10 = 1
-        final diffInSymbols = difference ~/ pow(alphabetSize, index) % (alphabetSize);
+        final diffInSymbols =
+            difference ~/ pow(alphabetSize, index) % (alphabetSize);
         var newElementCode =
-            firstRank.codeUnitAt(secondRank.length - index - 1) + diffInSymbols + offset;
+            firstRank.codeUnitAt(secondRank.length - index - 1) +
+                diffInSymbols +
+                offset;
         offset = 0;
 
         /// if newElement is greater then 'z'
@@ -119,7 +124,8 @@ class LexoRank {
     final startRandPos = startRankLetter.codeUnits.first;
     final endRankPos = endRankLetter.codeUnits.first;
 
-    if (startRandPos < 'a'.codeUnits.first || endRankPos > 'z'.codeUnits.first) {
+    if (startRandPos < 'a'.codeUnits.first ||
+        endRankPos > 'z'.codeUnits.first) {
       throw LexoRankException('Only support letter from `a` to `z`');
     }
 
@@ -147,7 +153,8 @@ class LexoRank {
     }
     final items = <String>[];
     for (int i = 1; i < lastList.length; i = i + 2) {
-      items.add(getRankBetween(firstRank: lastList[i - 1], secondRank: lastList[i]));
+      items.add(
+          getRankBetween(firstRank: lastList[i - 1], secondRank: lastList[i]));
     }
 
     return items;
