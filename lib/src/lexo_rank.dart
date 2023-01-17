@@ -109,6 +109,33 @@ class LexoRank {
     return newElement;
   }
 
+  /// Generates the next lexicographically ranked string based on the input string.
+  String nextLexo(String current) {
+    final lastChar = current[current.length - 1];
+    if (lastChar == 'z') {
+      return "${current}a";
+    } else if (lastChar.codeUnitAt(0) < 'a'.codeUnitAt(0) ||
+        lastChar.codeUnitAt(0) > 'z'.codeUnitAt(0)) {
+      return "${current}a";
+    } else {
+      final next =
+          String.fromCharCode(current.codeUnitAt(current.length - 1) + 1);
+      return current.substring(0, current.length - 1) + next;
+    }
+  }
+
+  /// Generates the previous lexicographically ranked string based on the input string.
+  String prevLexo(String current) {
+    final lastChar = current[current.length - 1];
+    if (lastChar == 'a') {
+      return current.substring(0, current.length - 1);
+    } else {
+      final prev =
+          String.fromCharCode(current.codeUnitAt(current.length - 1) - 1);
+      return current.substring(0, current.length - 1) + prev;
+    }
+  }
+
   /// Generate a list of initial rank for re-balancing items
   ///
   /// [sizeOfItems] indicate number of ranks that must be generated
